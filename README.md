@@ -1,8 +1,18 @@
-# almond 
+# Almond
 
 ## Installation
 
 ### Requirements
+
+#### Postgresql
+
+1. Install docker-compose
+2. let docker do the magic: `$ docker-compose up`
+3. Ready to rock on port 5433
+
+Note: This is not following default port for postgres, however the migrations script is aware of this. Worry not.
+
+#### Golang
 
 golang packages required for development:
 
@@ -15,10 +25,10 @@ Install vendors:
 $ govendor sync
 ```
 
-Run migrations:
+Run migrations (requires postgres service, check docker composer):
 
 ```bash
 $ goose up
 ```
 
-
+Ready to hack!
