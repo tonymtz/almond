@@ -1,5 +1,7 @@
 # Almond
 
+[ ![Codeship Status for tonymtz/almond](https://app.codeship.com/projects/4f4db340-2342-0135-1185-229ae24d69ea/status?branch=master)](https://app.codeship.com/projects/221937)
+
 ## Installation
 
 ### Requirements
