@@ -8,6 +8,7 @@ import (
 type UsersRepository interface {
     Create(*models.User) (int64, error)
     GetOneById(int64) (*models.User, error)
+    GetOneByGoogleId(string) (*models.User, error)
 }
 
 type usersRepository struct {
@@ -39,6 +40,28 @@ func (this *usersRepository) GetOneById(userId int64) (*models.User, error) {
     err := this.database.QueryRow(
         "SELECT id, google_id, created_at, display_name, profile_picture, token FROM users WHERE id = $1",
         userId,
+    ).Scan(
+        &myUser.Id,
+        &myUser.GoogleId,
+        &myUser.CreatedAt,
+        &myUser.DisplayName,
+        &myUser.ProfilePicture,
+        &myUser.Token,
+    )
+
+    if err != nil {
+        return nil, err
+    }
+
+    return myUser, nil
+}
+
+func (this *usersRepository) GetOneByGoogleId(googleId string) (*models.User, error) {
+    myUser := &models.User{}
+
+    err := this.database.QueryRow(
+        "SELECT id, google_id, created_at, display_name, profile_picture, COALESCE(token, '') as token FROM users WHERE google_id = $1",
+        googleId,
     ).Scan(
         &myUser.Id,
         &myUser.GoogleId,
