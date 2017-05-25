@@ -100,7 +100,5 @@ func (this *usersRepository) Update(myUser *models.User) (error) {
 }
 
 func NewUsersRepository(database *sql.DB) UsersRepository {
-    return &usersRepository{
-        database: database,
-    }
+    return &usersRepository{database: database}
 }
