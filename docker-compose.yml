@@ -1,0 +1,15 @@
+dbdata:
+  image: postgres
+  volumes:
+    - ./.docker/postgresql:/var/lib/postgresql
+  command: "true"
+
+db:
+  image: postgres
+  volumes_from:
+    - dbdata
+  ports:
+    - "5433:5432"
+  environment:
+    - POSTGRES_PASSWORD=welcome1
+    - POSTGRES_DB=almond_db

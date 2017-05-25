@@ -20,3 +20,6 @@
 # govendors
 vendor/*
 !vendor/vendor.json
+
+# docker containers stuff
+.docker/

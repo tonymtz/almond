@@ -1,15 +1,24 @@
-# almond
+# almond 
 
 ## Installation
 
 ### Requirements
 
-golang packages required to compile app:
+golang packages required for development:
 
-- govendor: go get -u github.com/kardianos/govendor
+- [govendor](https://github.com/kardianos/govendor): `$ go get -u github.com/kardianos/govendor`
+- [goose](https://bitbucket.org/liamstask/goose/): `$ go get bitbucket.org/liamstask/goose/cmd/goose`
 
 Install vendors:
 
-`sh
-$ govendor fetch ?
-`
+```bash
+$ govendor sync
+```
+
+Run migrations:
+
+```bash
+$ goose up
+```
+
+
