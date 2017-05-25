@@ -127,6 +127,12 @@
 			"path": "golang.org/x/sys/unix",
 			"revision": "a55a76086885b80f79961eacb876ebd8caf3868d",
 			"revisionTime": "2017-05-24T02:50:34Z"
+		},
+		{
+			"checksumSHA1": "uR1qI7p56R7u43DJGoYtyRleQpA=",
+			"path": "gopkg.in/DATA-DOG/go-sqlmock.v1",
+			"revision": "b983233bc0bbea4dc6e8ec8c8c923d935765ffec",
+			"revisionTime": "2017-02-21T15:59:18Z"
 		}
 	],
 	"rootPath": "github.com/tonymtz/almond"
