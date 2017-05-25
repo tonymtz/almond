@@ -197,6 +197,81 @@ func TestUsersRepository_GetOneByGoogleId_ErrorResult(t *testing.T) {
     }
 }
 
+func TestUsersRepository_Update_NoErrorResult(t *testing.T) {
+    db, mock, err := sqlmock.New()
+    if err != nil {
+        t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
+    }
+    defer db.Close()
+
+    mock.ExpectExec("UPDATE users SET (.+) WHERE").WithArgs(
+        testUser.Token,
+        testUser.Id,
+    ).WillReturnResult(sqlmock.NewResult(9, 1))
+
+    myUsersRepository := &usersRepository{database: db}
+
+    // execute our method
+    if err := myUsersRepository.Update(testUser); err != nil {
+        t.Errorf("error was not expected while updating stats: %s", err)
+    }
+
+    // expectations
+    if err := mock.ExpectationsWereMet(); err != nil {
+        t.Errorf("there were unfulfilled expections: %s", err)
+    }
+}
+
+func TestUsersRepository_Update_ErrorResult(t *testing.T) {
+    db, mock, err := sqlmock.New()
+    if err != nil {
+        t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
+    }
+    defer db.Close()
+
+    mock.ExpectExec("UPDATE users SET (.+) WHERE").WithArgs(
+        testUser.Token,
+        testUser.Id,
+    ).WillReturnError(errors.New("Expected Error"))
+
+    myUsersRepository := &usersRepository{database: db}
+
+    // execute our method
+    if err := myUsersRepository.Update(testUser); err == nil {
+        t.Errorf("error was not expected while updating stats: %s", err)
+    }
+
+    // expectations
+    if err := mock.ExpectationsWereMet(); err != nil {
+        t.Errorf("there were unfulfilled expections: %s", err)
+    }
+}
+
+func TestUsersRepository_Update_ErrorOnRowsAffected(t *testing.T) {
+    db, mock, err := sqlmock.New()
+    if err != nil {
+        t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
+    }
+    defer db.Close()
+
+    mock.ExpectExec("UPDATE users SET (.+) WHERE").WithArgs(
+        testUser.Token,
+        testUser.Id,
+    ).WillReturnResult(sqlmock.NewErrorResult(errors.New("Expected Error")))
+
+    myUsersRepository := &usersRepository{database: db}
+
+    // execute our method
+    if err := myUsersRepository.Update(testUser); err == nil {
+        t.Errorf("error was not expected while updating stats: %s", err)
+    }
+
+    // expectations
+    if err := mock.ExpectationsWereMet(); err != nil {
+        t.Errorf("there were unfulfilled expections: %s", err)
+    }
+}
+
 func TestNewUsersRepository(t *testing.T) {
     mockDB := &sql.DB{}
 

@@ -9,6 +9,7 @@ type UsersRepository interface {
     Create(*models.User) (int64, error)
     GetOneById(int64) (*models.User, error)
     GetOneByGoogleId(string) (*models.User, error)
+    Update(*models.User) (error)
 }
 
 type usersRepository struct {
@@ -76,6 +77,26 @@ func (this *usersRepository) GetOneByGoogleId(googleId string) (*models.User, er
     }
 
     return myUser, nil
+}
+
+func (this *usersRepository) Update(myUser *models.User) (error) {
+    result, err := this.database.Exec(
+        "UPDATE users SET token = $1 WHERE id = $2",
+        myUser.Token,
+        myUser.Id,
+    )
+
+    if err != nil {
+        return err
+    }
+
+    _, err = result.RowsAffected()
+
+    if err != nil {
+        return err
+    }
+
+    return nil
 }
 
 func NewUsersRepository(database *sql.DB) UsersRepository {
