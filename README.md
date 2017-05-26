@@ -47,7 +47,7 @@ Open your browser and navigate to [http://localhost:3000](http://localhost:3000)
 ### Testing
 
 ```bash
-$ govendor test +local -cover
+$ govendor test +l,^p [-cover]
 ```
 
 Ready to hack!
