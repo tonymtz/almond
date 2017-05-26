@@ -29,12 +29,12 @@ func TestUsersRepository_Create_NoErrorResult(t *testing.T) {
         testUser.DisplayName,
         testUser.ProfilePicture,
         testUser.Token,
-    ).WillReturnRows(sqlmock.NewRows([]string{"lastInsertedId"}).AddRow(5))
+    ).WillReturnRows(sqlmock.NewRows([]string{"lastInsertedId"}).AddRow(9))
 
     myUsersRepository := &usersRepository{database: db}
 
     // execute our method
-    if id, err := myUsersRepository.Create(testUser); err != nil || id != 5 {
+    if id, err := myUsersRepository.Create(testUser); err != nil || id != 9 {
         t.Errorf("error was not expected while updating stats: %s", err)
     }
 
