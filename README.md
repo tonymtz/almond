@@ -1,6 +1,7 @@
 # Almond
 
 [ ![Codeship Status for tonymtz/almond](https://app.codeship.com/projects/4f4db340-2342-0135-1185-229ae24d69ea/status?branch=master)](https://app.codeship.com/projects/221937)
+[![codecov](https://codecov.io/gh/tonymtz/almond/branch/master/graph/badge.svg?token=sf0qEs1thZ)](https://codecov.io/gh/tonymtz/almond)
 
 ## Installation
 
