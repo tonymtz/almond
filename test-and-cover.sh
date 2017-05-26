@@ -11,7 +11,7 @@
 echo "mode: count" > coverage.txt
 
 # Initialize error tracking
-ERROR=""
+#ERROR=""
 
 # Test each package and append coverage profile info to coverage.txt
 PACKAGES=$(govendor list +l,^p | while read line; do echo $line | awk '{print $2}'; done)
@@ -24,9 +24,9 @@ done
 
 rm profile_tmp.cov
 
-if [ ! -z "$ERROR" ]
-then
-    die "Encountered error, last error was: $ERROR"
-fi
+#if [ ! -z "$ERROR" ]
+#then
+#    die "Encountered error, last error was: $ERROR"
+#fi
 
 curl -s https://codecov.io/bash | bash -s arg1 arg2
