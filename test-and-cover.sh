@@ -2,10 +2,10 @@
 
 # This script tests multiple packages and creates a consolidated cover profile
 
-function die() {
-  echo $*
-  exit 1
-}
+#function die() {
+#  echo $*
+#  exit 1
+#}
 
 # Initialize coverage.txt
 echo "mode: count" > coverage.txt
